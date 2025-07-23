@@ -10,31 +10,51 @@
 #include "Components/Input/WarriorInputComponent.h"
 #include "DataAssets/Input/DataAsset_InputConfig.h"
 #include "WarriorGameplayTags.h"
+#include "AbilitySystem/WarriorAbilitySystemComponent.h"
 
 #include "WarriorDebugHelper.h"
 
 AWarriorHeroCharacter::AWarriorHeroCharacter()
 {
 	GetCapsuleComponent()->InitCapsuleSize(42.0f, 96.0f);
-	
+
+	// 禁用控制器旋转影响角色
 	bUseControllerRotationPitch = false;
 	bUseControllerRotationYaw = false;
 	bUseControllerRotationRoll = false;
-	
+
+	// 创建摄像机弹簧臂并设置参数
 	CameraBoom = CreateDefaultSubobject<USpringArmComponent>(TEXT("摄像机弹簧臂"));
 	CameraBoom->SetupAttachment(GetRootComponent());
 	CameraBoom->TargetArmLength = 200.0f;
 	CameraBoom->SocketOffset = FVector(0.0f, 55.f, 65.f);
 	CameraBoom->bUsePawnControlRotation = true;
 
+	// 创建摄像机并附着在弹簧臂上
 	FollowCamera = CreateDefaultSubobject<UCameraComponent>(TEXT("摄像机"));
 	FollowCamera->SetupAttachment(CameraBoom, USpringArmComponent::SocketName);
 	FollowCamera->bUsePawnControlRotation = false;
 
+	// 设置移动相关参数
 	GetCharacterMovement()->bOrientRotationToMovement = true;
 	GetCharacterMovement()->RotationRate = FRotator(0.0f, 500.0f, 0.0f);
 	GetCharacterMovement()->MaxWalkSpeed = 400.0f;
 	GetCharacterMovement()->BrakingDecelerationWalking = 2000.0f;
+}
+
+void AWarriorHeroCharacter::PossessedBy(AController* NewController)
+{
+	Super::PossessedBy(NewController);
+
+	if (WarriorAbilitySystemComponent && WarriorAttributeSet)
+	{
+		const FString ASCText = FString::Printf(TEXT("Owner Actor: %s, AvatarActor: %s"),
+			*WarriorAbilitySystemComponent->GetOwnerActor()->GetActorLabel(),
+			*WarriorAbilitySystemComponent->GetAvatarActor()->GetActorLabel());
+		Debug::Print("Ability system component valid. " + ASCText, FColor::Green);
+		Debug::Print("AttributeSet valid. " + ASCText, FColor::Green);
+		
+	}
 }
 
 void AWarriorHeroCharacter::SetupPlayerInputComponent(class UInputComponent* InputComponent)
@@ -48,7 +68,10 @@ void AWarriorHeroCharacter::SetupPlayerInputComponent(class UInputComponent* Inp
 	Subsystem->AddMappingContext(InputConfigDataAsset->DefaultMappingContext, 0);
 
 	UWarriorInputComponent* WarriorInputComponent = CastChecked<UWarriorInputComponent>(InputComponent);
+
+	// 绑定移动输入
 	WarriorInputComponent->BindNativeInputAction(InputConfigDataAsset, WarriorGameplayTags::InputTag_Move, ETriggerEvent::Triggered, this, &ThisClass::Input_Move);
+	// 绑定视角控制
 	WarriorInputComponent->BindNativeInputAction(InputConfigDataAsset, WarriorGameplayTags::InputTag_Look, ETriggerEvent::Triggered, this, &ThisClass::Input_Look);
 	
 }
@@ -57,7 +80,6 @@ void AWarriorHeroCharacter::BeginPlay()
 {
 	Super::BeginPlay();
 
-	Debug::Print(TEXT("WarriorHeroCharacter::BeginPlay()"));
 }
 
 void AWarriorHeroCharacter::Input_Move(const FInputActionValue& InputActionValue)
