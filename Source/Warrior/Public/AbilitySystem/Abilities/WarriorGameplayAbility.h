@@ -6,6 +6,7 @@
 #include "Abilities/GameplayAbility.h"
 #include "WarriorGameplayAbility.generated.h"
 
+// 能力的激活策略
 UENUM(Blueprintable)
 enum class EWarriorAbilityActivationPolicy : uint8
 {
@@ -26,9 +27,9 @@ class WARRIOR_API UWarriorGameplayAbility : public UGameplayAbility
 protected:
 	//~ Begin UGameplayAbility interface
 	// 能力被添加到 AbilitySystemComponent 时调用
-	virtual void OnGiveAbility(const FGameplayAbilityActorInfo* ActorInfo, const FGameplayAbilitySpec& Spec);
+	virtual void OnGiveAbility(const FGameplayAbilityActorInfo* ActorInfo, const FGameplayAbilitySpec& Spec) override;
 	// 能力结束时调用（主动结束或被取消）
-	virtual void EndAbility(const FGameplayAbilitySpecHandle Handle, const FGameplayAbilityActorInfo* ActorInfo, const FGameplayAbilityActivationInfo ActivationInfo, bool bReplicateEndAbility, bool bWasCancelled);
+	virtual void EndAbility(const FGameplayAbilitySpecHandle Handle, const FGameplayAbilityActorInfo* ActorInfo, const FGameplayAbilityActivationInfo ActivationInfo, bool bReplicateEndAbility, bool bWasCancelled) override;
 	//~ End UGameplayAbility interface
 
 	/** 决定该能力的激活策略（例如是否自动激活） */
