@@ -18,7 +18,7 @@ class WARRIOR_API UDataAsset_StartUpDataBase : public UDataAsset
 
 public:
 	/** 将数据资产中定义的所有能力赋予指定的 AbilitySystemComponent */
-	virtual void GiveToAbilitySystemComponent(UWarriorAbilitySystemComponent* InWarriorASCToGive, int32 ApplyLevel = 1);
+	virtual void GiveToAbilitySystemComponent(UWarriorAbilitySystemComponent* InASCToGive, int32 ApplyLevel = 1);
 protected:
 	/** 被赋予后立即激活的能力列表（如 OnGiven 策略的能力） */
 	UPROPERTY(EditDefaultsOnly, Category = "StartupData")
@@ -29,5 +29,5 @@ protected:
 	TArray< TSubclassOf<UWarriorGameplayAbility> > ReactiveAbilities;
 
 	/** 将指定能力列表赋予目标 ASC */
-	void GrantAbilities(const TArray<TSubclassOf<UWarriorGameplayAbility>>& InAbilitiesToGive, UWarriorAbilitySystemComponent* InWarriorASCToGive, int32 ApplyLevel);
+	void GrantAbilities(const TArray<TSubclassOf<UWarriorGameplayAbility>>& InAbilitiesToGive, UWarriorAbilitySystemComponent* InASCToGive, int32 ApplyLevel);
 };
