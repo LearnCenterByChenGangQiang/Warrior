@@ -7,6 +7,7 @@
 #include "WarriorGameplayAbility.generated.h"
 
 class UPawnCombatComponent;
+class UWarriorAbilitySystemComponent;
 
 // 能力的激活策略
 UENUM(Blueprintable)
@@ -41,4 +42,7 @@ protected:
 	/** */
 	UFUNCTION(BlueprintPure, Category = "Warrior|Ability")
 	UPawnCombatComponent* GetPawnCombatComponentFromActorInfo() const;
+
+	UFUNCTION(BlueprintPure, Category = "Warrior|Ability")
+	UWarriorAbilitySystemComponent* GetWarriorAbilitySystemComponentFromActorInfo() const;
 };
