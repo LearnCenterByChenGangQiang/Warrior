@@ -76,6 +76,8 @@ void AWarriorHeroCharacter::SetupPlayerInputComponent(class UInputComponent* Inp
 	WarriorInputComponent->BindNativeInputAction(InputConfigDataAsset, WarriorGameplayTags::InputTag_Move, ETriggerEvent::Triggered, this, &ThisClass::Input_Move);
 	// 绑定视角控制
 	WarriorInputComponent->BindNativeInputAction(InputConfigDataAsset, WarriorGameplayTags::InputTag_Look, ETriggerEvent::Triggered, this, &ThisClass::Input_Look);
+
+	WarriorInputComponent->BindAbilityInputAction(InputConfigDataAsset, this, &ThisClass::Input_AbilityInputPressed, &ThisClass::Input_AbilityInputReleased);
 	
 }
 
@@ -111,4 +113,14 @@ void AWarriorHeroCharacter::Input_Look(const FInputActionValue& InputActionValue
 	
 	if (LookAxisVector.X != 0) AddControllerYawInput(LookAxisVector.X);
 	if (LookAxisVector.Y != 0) AddControllerPitchInput(-LookAxisVector.Y);
+}
+
+void AWarriorHeroCharacter::Input_AbilityInputPressed(FGameplayTag InInputTag)
+{
+	WarriorAbilitySystemComponent->OnAbilityInputPressed(InInputTag);
+}
+
+void AWarriorHeroCharacter::Input_AbilityInputReleased(FGameplayTag InInputTag)
+{
+	WarriorAbilitySystemComponent->OnAbilityInputReleased(InInputTag);
 }
