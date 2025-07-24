@@ -10,6 +10,7 @@ class UDataAsset_InputConfig;
 class UCameraComponent;
 class USpringArmComponent;
 struct FInputActionValue;
+class UHeroCombatComponent;
 /**
  * 
  */
@@ -39,6 +40,10 @@ private:
 	/** 摄像机组件，绑定在弹簧臂上 */
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Camera", meta = (AllowPrivateAccess = "true"))
 	TObjectPtr<UCameraComponent> FollowCamera;
+
+	/** 战斗组件，处理角色的战斗逻辑 */
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Combat", meta = (AllowPrivateAccess = "true"))
+	TObjectPtr<UHeroCombatComponent> HeroCombatComponent;
 #pragma endregion
 
 #pragma region Input
@@ -52,4 +57,7 @@ private:
 	/** 输入响应：角色视角控制 */
 	void Input_Look(const FInputActionValue& InputActionValue);
 #pragma endregion
+
+public:
+	UHeroCombatComponent* GetHeroCombatComponent() const { return HeroCombatComponent; }
 };
