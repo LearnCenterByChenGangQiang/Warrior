@@ -6,17 +6,6 @@
 #include "AbilitySystem/WarriorAbilitySystemComponent.h"
 
 /**
- * 校验能力配置是否有效。
- * 
- * @return 标签有效 且 技能类非空时返回 true，否则返回 false。
- */
-bool FWarriorHeroAbilitySet::IsValid() const
-{
-	return InputTag.IsValid() && AbilityToGrant;
-}
-
-
-/**
  * 将英雄的初始能力授予指定的能力系统组件（ASC）。
  * 
  * 同时会将每个能力与其输入标签绑定（添加到 AbilitySpec 的 DynamicSpecSourceTags）。
