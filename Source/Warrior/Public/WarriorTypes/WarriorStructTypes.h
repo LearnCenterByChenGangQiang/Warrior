@@ -7,6 +7,7 @@
 class UInputMappingContext;
 class UWarriorHeroLinkedAnimLayer;
 class UWarriorGameplayAbility;
+class UWarriorHeroGameplayAbility;
 
 /**
  * 英雄角色专用的能力配置结构体。
@@ -24,7 +25,7 @@ struct FWarriorHeroAbilitySet
 
 	/** 要授予的技能类（派生自 UWarriorGameplayAbility） */
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly)
-	TSubclassOf<UWarriorGameplayAbility> AbilityToGrant;
+	TSubclassOf<UWarriorHeroGameplayAbility> AbilityToGrant;
 
 	/** 检查该配置是否有效（标签有效且技能类非空） */
 	bool IsValid() const;

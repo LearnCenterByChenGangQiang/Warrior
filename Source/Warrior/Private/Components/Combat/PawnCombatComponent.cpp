@@ -24,8 +24,8 @@ void UPawnCombatComponent::RegisterSpawnedWeapon(FGameplayTag InWeaponTagToRegis
 	}
 
 	// 打印调试信息，便于开发中查看注册过程
-	const FString WeaponString = FString::Printf(TEXT("A weapon named: %s has been registered with tag: %s"),*InWeaponToRegister->GetName(), *InWeaponTagToRegister.ToString());
-	Debug::Print(WeaponString);
+	// const FString WeaponString = FString::Printf(TEXT("A weapon named: %s has been registered with tag: %s"),*InWeaponToRegister->GetName(), *InWeaponTagToRegister.ToString());
+	// Debug::Print(WeaponString);
 	
 }
 
