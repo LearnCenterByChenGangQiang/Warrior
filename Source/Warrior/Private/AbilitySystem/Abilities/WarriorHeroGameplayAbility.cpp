@@ -20,11 +20,10 @@ AWarriorHeroController* UWarriorHeroGameplayAbility::GetHeroControllerFromActorI
 {
 	if (!CachedWarriorHeroController.IsValid())
 	{
-		// 尝试将 AvatarActor 转为 AWarriorHeroController
-		CachedWarriorHeroController = Cast<AWarriorHeroController>(CurrentActorInfo->AvatarActor);
+		CachedWarriorHeroController = Cast<AWarriorHeroController>(CurrentActorInfo->PlayerController);
 	}
-	// 如果转换成功，返回缓存的控制器指针
-	return CachedWarriorHeroController.IsValid() ? CachedWarriorHeroController.Get() : nullptr;
+
+	return CachedWarriorHeroController.IsValid()? CachedWarriorHeroController.Get() : nullptr;
 }
 
 UHeroCombatComponent* UWarriorHeroGameplayAbility::GetHeroCombatComponentFromActorInfo()
