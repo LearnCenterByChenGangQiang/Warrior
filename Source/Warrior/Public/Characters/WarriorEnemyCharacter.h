@@ -19,8 +19,16 @@ public:
 	AWarriorEnemyCharacter();
 
 protected:
+	//~ Begin APawn interface
+	/** 控制器接管角色时调用 */
+	virtual void PossessedBy(AController* NewController) override;
+	//~ End APawn interface
+	
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Combat")
 	UEnemyCombatComponent* EnemyCombatComponent;
+
+private:
+	void InitEnemyStartUpData();
 
 public:
 	FORCEINLINE UEnemyCombatComponent* GetEnemyCombatComponent() const { return EnemyCombatComponent;}
