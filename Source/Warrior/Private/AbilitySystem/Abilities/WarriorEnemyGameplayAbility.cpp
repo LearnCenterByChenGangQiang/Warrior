@@ -3,7 +3,6 @@
 
 #include "AbilitySystem/Abilities/WarriorEnemyGameplayAbility.h"
 #include "Characters/WarriorEnemyCharacter.h"
-#include "Components/Combat/EnemyCombatComponent.h"
 
 
 AWarriorEnemyCharacter* UWarriorEnemyGameplayAbility::GetEnemyCharacterFromActorInfo()
