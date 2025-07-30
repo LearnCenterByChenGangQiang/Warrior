@@ -8,6 +8,7 @@
 
 class UWarriorGameplayAbility;
 class UWarriorAbilitySystemComponent;
+class UGameplayEffect;
 /**
  * 
  */
@@ -27,6 +28,10 @@ protected:
 	/** 被动/反应式能力（如监听事件、自动反击等） */
 	UPROPERTY(EditDefaultsOnly, Category = "StartupData")
 	TArray< TSubclassOf<UWarriorGameplayAbility> > ReactiveAbilities;
+
+	/** 立即应用的游戏效果列表（如 Buff、Debuff 等） */
+	UPROPERTY(EditDefaultsOnly, Category = "StartupData")
+	TArray< TSubclassOf<UGameplayEffect> > StartUpGameplayEffects;
 
 	/** 将指定能力列表赋予目标 ASC */
 	void GrantAbilities(const TArray<TSubclassOf<UWarriorGameplayAbility>>& InAbilitiesToGive, UWarriorAbilitySystemComponent* InASCToGive, int32 ApplyLevel);
