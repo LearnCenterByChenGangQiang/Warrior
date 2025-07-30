@@ -18,6 +18,10 @@ class WARRIOR_API AWarriorEnemyCharacter : public AWarriorBaseCharacter
 public:
 	AWarriorEnemyCharacter();
 
+	//~ Begin IPawnComboInterface interface
+	virtual UPawnCombatComponent* GetPawnCombatComponent() const override;
+	//~ End IPawnComboInterface interface
+
 protected:
 	//~ Begin APawn interface
 	/** 控制器接管角色时调用 */
