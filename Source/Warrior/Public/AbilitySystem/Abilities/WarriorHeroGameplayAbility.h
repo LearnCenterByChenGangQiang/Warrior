@@ -32,7 +32,7 @@ public:
 	UHeroCombatComponent* GetHeroCombatComponentFromActorInfo();
 
 	UFUNCTION(BlueprintPure, Category = "Warrior|Ability")
-	FGameplayEffectSpecHandle MakeHeroDamageEffectSpecHandle(TSubclassOf<UGameplayEffect> EffectClass, float InWeaponBaseDamage, FGameplayTag InCurrentAttackTypeTag, int32 InCurrentComboCount);
+	FGameplayEffectSpecHandle MakeHeroDamageEffectSpecHandle(TSubclassOf<UGameplayEffect> EffectClass, float InWeaponBaseDamage, FGameplayTag InCurrentAttackTypeTag, int32 InUsedComboCount);
 
 private:
 	/** 缓存的英雄角色指针，避免每次调用都执行 Cast */
