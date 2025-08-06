@@ -1,9 +1,10 @@
 # UE5生成的目录
-Binaries
-DerivedDataCache
-Intermediate
-Saved
-Build
+Binaries/
+DerivedDataCache/
+Intermediate/
+Saved/
+Build/
+DerivedDataCache/
 
 # 开发IDE生成的目录或文件
 .idea
@@ -14,4 +15,5 @@ Build
 *.opendb
 *.sdf
 *.suo
+
 
