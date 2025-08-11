@@ -26,7 +26,7 @@ protected:
 	UFUNCTION(BlueprintImplementableEvent, meta=(DisplayName ="On Owning Enemy UI Component Initialized"))
 	void BP_OnOwningEnemyUIComponentInitialized(UEnemyUIComponent* OwningEnemyUIComponent);
 
-private:
+public:
 	UFUNCTION(BlueprintCallable)
 	void InitEnemyCreatedWidget(AActor* OwningEnemyActor);
 	
