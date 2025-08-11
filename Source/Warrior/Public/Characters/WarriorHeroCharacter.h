@@ -30,6 +30,7 @@ public:
 
 	//~ Begin UPawnUIComponent interface
 	virtual UPawnUIComponent* GetPawnUIComponent() const override;
+	virtual UHeroUIComponent* GetHeroUIComponent() const override;
 	//~ End UPawnUIComponent interface
 protected:
 	//~ Begin APawn interface
