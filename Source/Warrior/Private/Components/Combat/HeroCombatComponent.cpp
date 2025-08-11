@@ -40,7 +40,7 @@ void UHeroCombatComponent::OnHitTargetActor(AActor* HitActor)
 
 	UAbilitySystemBlueprintLibrary::SendGameplayEventToActor(
 		GetOwningPawn(),
-		WarriorGameplayTags::Player_Ability_HitPause,
+		WarriorGameplayTags::Player_Event_HitPause,
 		FGameplayEventData());
 }
 
@@ -48,6 +48,6 @@ void UHeroCombatComponent::OnWeaponPulledFromTargetActor(AActor* PulledActor)
 {
 	UAbilitySystemBlueprintLibrary::SendGameplayEventToActor(
 		GetOwningPawn(),
-		WarriorGameplayTags::Player_Ability_HitPause,
+		WarriorGameplayTags::Player_Event_HitPause,
 		FGameplayEventData());
 }
