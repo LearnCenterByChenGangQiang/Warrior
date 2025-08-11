@@ -33,7 +33,7 @@ protected:
 	//~ End APawn interface
 
 	/** 初始化输入组件绑定（使用 Enhanced Input） */
-	virtual void SetupPlayerInputComponent(class UInputComponent* InputComponent) override;
+	virtual void SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent) override;
 	virtual void BeginPlay() override;
 
 private:

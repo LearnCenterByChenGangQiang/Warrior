@@ -65,7 +65,7 @@ void AWarriorHeroCharacter::PossessedBy(AController* NewController)
 	}
 }
 
-void AWarriorHeroCharacter::SetupPlayerInputComponent(class UInputComponent* InputComponent)
+void AWarriorHeroCharacter::SetupPlayerInputComponent(class UInputComponent* PlayerInputComponent)
 {
 	checkf(InputConfigDataAsset, TEXT("Forgot to assign a valid data asset as input config!"));
 
