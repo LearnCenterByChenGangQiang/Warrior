@@ -12,6 +12,7 @@ class UCameraComponent;
 class USpringArmComponent;
 struct FInputActionValue;
 class UHeroCombatComponent;
+class  UHeroUIComponent;
 /**
  * 
  */
@@ -26,6 +27,10 @@ public:
 	//~ Begin IPawnComboInterface interface
 	virtual UPawnCombatComponent* GetPawnCombatComponent() const override;
 	//~ End IPawnComboInterface interface
+
+	//~ Begin UPawnUIComponent interface
+	virtual UPawnUIComponent* GetPawnUIComponent() const override;
+	//~ End UPawnUIComponent interface
 protected:
 	//~ Begin APawn interface
 	/** 控制器接管角色时调用 */
@@ -49,6 +54,9 @@ private:
 	/** 战斗组件，处理角色的战斗逻辑 */
 	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "Combat", meta = (AllowPrivateAccess = "true"))
 	TObjectPtr<UHeroCombatComponent> HeroCombatComponent;
+
+	UPROPERTY(VisibleAnywhere, BlueprintReadOnly, Category = "UI", meta = (AllowPrivateAccess = "true"))
+	UHeroUIComponent* HeroUIComponent;
 #pragma endregion
 
 #pragma region Input
