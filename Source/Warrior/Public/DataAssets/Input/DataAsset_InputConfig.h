@@ -26,7 +26,7 @@ public:
 
 	/** 对应的输入动作（Enhanced Input 中的 UInputAction） */
 	UPROPERTY(EditDefaultsOnly, BlueprintReadOnly)
-	UInputAction* InputAction;
+	TObjectPtr<UInputAction> InputAction;
 
 	/**
 	 * 判断当前配置是否有效（即标签有效且动作不为空）。
