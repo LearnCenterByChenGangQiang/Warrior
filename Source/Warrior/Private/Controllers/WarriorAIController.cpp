@@ -12,10 +12,7 @@
 AWarriorAIController::AWarriorAIController(const FObjectInitializer& ObjectInitializer)
 	: Super(ObjectInitializer.SetDefaultSubobjectClass<UCrowdFollowingComponent>("PathFollowingComponent"))
 {
-	if (UCrowdFollowingComponent* CrowComp = Cast<UCrowdFollowingComponent>(GetPathFollowingComponent()))
-	{
-		Debug::Print(TEXT("CrowdFollowingComponent Set Successed!"), FColor::Green);
-	}
+	
 
 	AISenseConfig_Sight = CreateDefaultSubobject<UAISenseConfig_Sight>(TEXT("EnemySenseConfig_Sight"));
 	
@@ -54,6 +51,29 @@ ETeamAttitude::Type AWarriorAIController::GetTeamAttitudeTowards(const AActor& O
 		return ETeamAttitude::Hostile;
 	}
 	return ETeamAttitude::Friendly;
+}
+
+void AWarriorAIController::BeginPlay()
+{
+	Super::BeginPlay();
+
+	if (UCrowdFollowingComponent* CrowComp = Cast<UCrowdFollowingComponent>(GetPathFollowingComponent()))
+	{
+		CrowComp->SetCrowdSimulationState(bEnableDetourCrowdAvoidance ? ECrowdSimulationState::Enabled : ECrowdSimulationState::Disabled);
+
+		switch (DetourCrowAvoidanceQuality)
+		{
+		case 1: CrowComp->SetCrowdAvoidanceQuality(ECrowdAvoidanceQuality::Low);	break;
+		case 2: CrowComp->SetCrowdAvoidanceQuality(ECrowdAvoidanceQuality::Medium); break;
+		case 3: CrowComp->SetCrowdAvoidanceQuality(ECrowdAvoidanceQuality::Good);	 break;
+		case 4: CrowComp->SetCrowdAvoidanceQuality(ECrowdAvoidanceQuality::High);	 break;
+		default: break;	
+		}
+
+		CrowComp->SetAvoidanceGroup(1);
+		CrowComp->SetGroupsToAvoid(1);
+		CrowComp->SetCrowdCollisionQueryRange(CollisionQueryRange);
+	}
 }
 
 void AWarriorAIController::OnEnemyPerceptionUpdated(AActor* Actor, FAIStimulus Stimulus)
